@@ -1,7 +1,7 @@
 <template>
 <div id="todo-container">
   <div v-for="todo in todos" :key="todo.id">
-    <TodoItem v-bind:todo="todo" />
+    <TodoItem v-bind:todo="todo" @deleteTodo="deleteTodo"/>
   </div></div>
 </template>
 
@@ -19,6 +19,11 @@ export default {
           { id: 2, text: "Todo 2", isChecked: false }
         ]
     };
+  },
+  methods: {
+      deleteTodo(id) {
+          this.todos = this.todos.filter(t => t.id !== id);
+      }
   }
 };
 </script>

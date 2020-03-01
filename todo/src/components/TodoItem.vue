@@ -5,6 +5,7 @@
       v-on:click="toggleChecked"
     >
       {{ todo.text }}
+      <button class="delete-todo" @click="$emit('deleteTodo', todo.id)">X</button>
     </div>
 </template>
 
@@ -38,5 +39,14 @@ export default {
     content: "\2713 ";
     color: #000;
     float: left;
+}
+
+.delete-todo {
+    float: right;
+    width: 20px;
+    height: 20px;
+    color: #fff;
+    font-weight: bold;
+    background: #000;
 }
 </style>
