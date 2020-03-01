@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <ul>
+    <ul class="navigation">
       <li><router-link to="/">Welcome</router-link></li>
       <li><router-link to="/todos">Todos</router-link></li>
     </ul>
@@ -39,5 +39,14 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+ul.navigation {
+  list-style-type: square;
+  padding: 0;
+}
+.navigation li {
+  display: inline-block;
+  margin: 0 10px;
 }
 </style>
