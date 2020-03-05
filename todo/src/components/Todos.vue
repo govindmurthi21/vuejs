@@ -13,6 +13,7 @@
 <script>
 import TodoItem from "./TodoItem.vue";
 import AddTodo from "./AddTodo.vue";
+import ax from 'axios';
 export default {
   name: "Todos",
   components: {
@@ -21,10 +22,7 @@ export default {
   },
   data() {
     return {
-      todos: [
-        { id: 1, text: "Todo 1", isChecked: true },
-        { id: 2, text: "Todo 2", isChecked: false }
-      ],
+      todos: [],
       isAddDialogVisible: false
     };
   },
@@ -38,17 +36,15 @@ export default {
     hideAddDialog() {
         this.isAddDialogVisible = false;
     },
-    addTodo(text) {
-        let newId = 1;
-        const lastTodo = this.todos[this.todos.length - 1];
-        newId = lastTodo ? lastTodo.id + 1 : newId;
-
-        this.todos = [...this.todos, {
-            id: newId, text: text, isChecked: false
-        }];
-
+    async addTodo(text) {
+        const resp = await ax.post('https://jsonplaceholder.typicode.com/todos', {title: text, completed: false});
+        this.todos = [...this.todos, resp.data];
         this.hideAddDialog();
     }
+  },
+  async created() {
+      const todos = await ax.get('https://jsonplaceholder.typicode.com/todos?_limit=5');
+      this.todos = todos.data;
   }
 };
 </script>
